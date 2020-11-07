@@ -3,7 +3,6 @@
 \docType{package}
 \name{plsdepot}
 \alias{plsdepot}
-\alias{plsdepot-package}
 \title{\pkg{plsdepot} provides a toolset of PLS methods for analyzing 
 one or two data tables.}
 \description{

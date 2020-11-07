@@ -4,14 +4,37 @@
 \alias{plot.interbat}
 \title{Plot inter-battery basic results}
 \usage{
-\method{plot}{interbat}(x, what = "variables", comps = c(1, 2),
-  where = c("t", "t"), cex = 1, col.xlabels = "#5592e3",
-  col.ylabels = "#e3a654", yfont = 1, pos = NULL, offset = 0.1,
-  col.xarrows = "#5b9cf255", col.yarrows = "#e3a65455", lwd = 3,
-  length = 0, angle = 0, col.points = "#5592e3", pch = 21,
-  pt.bg = "#5b9cf255", show.names = FALSE, xpd = TRUE, xlab = NULL,
-  ylab = NULL, main = NULL, col.main = "gray35", cex.main = 1.2,
-  col.axis = "gray40", show.grid = TRUE, col.grid = "gray95", ...)
+\method{plot}{interbat}(
+  x,
+  what = "variables",
+  comps = c(1, 2),
+  where = c("t", "t"),
+  cex = 1,
+  col.xlabels = "#5592e3",
+  col.ylabels = "#e3a654",
+  yfont = 1,
+  pos = NULL,
+  offset = 0.1,
+  col.xarrows = "#5b9cf255",
+  col.yarrows = "#e3a65455",
+  lwd = 3,
+  length = 0,
+  angle = 0,
+  col.points = "#5592e3",
+  pch = 21,
+  pt.bg = "#5b9cf255",
+  show.names = FALSE,
+  xpd = TRUE,
+  xlab = NULL,
+  ylab = NULL,
+  main = NULL,
+  col.main = "gray35",
+  cex.main = 1.2,
+  col.axis = "gray40",
+  show.grid = TRUE,
+  col.grid = "gray95",
+  ...
+)
 }
 \arguments{
 \item{x}{An object of class \code{'interbat'}.}

@@ -4,13 +4,33 @@
 \alias{plot.nipals}
 \title{Plot NIPALS basic results}
 \usage{
-\method{plot}{nipals}(x, what = "variables", comps = c(1, 2),
-  cex = 1, col.labels = "#5592e3", pos = NULL, offset = 0.1,
-  col.arrows = "#5b9cf255", lwd = 3.5, length = 0, angle = 0,
-  col.points = "#5592e3", pch = 21, pt.bg = "#5b9cf255",
-  show.names = FALSE, xpd = TRUE, xlab = NULL, ylab = NULL,
-  main = NULL, col.main = "gray35", cex.main = 1.2,
-  col.axis = "gray40", show.grid = TRUE, col.grid = "gray95", ...)
+\method{plot}{nipals}(
+  x,
+  what = "variables",
+  comps = c(1, 2),
+  cex = 1,
+  col.labels = "#5592e3",
+  pos = NULL,
+  offset = 0.1,
+  col.arrows = "#5b9cf255",
+  lwd = 3.5,
+  length = 0,
+  angle = 0,
+  col.points = "#5592e3",
+  pch = 21,
+  pt.bg = "#5b9cf255",
+  show.names = FALSE,
+  xpd = TRUE,
+  xlab = NULL,
+  ylab = NULL,
+  main = NULL,
+  col.main = "gray35",
+  cex.main = 1.2,
+  col.axis = "gray40",
+  show.grid = TRUE,
+  col.grid = "gray95",
+  ...
+)
 }
 \arguments{
 \item{x}{An object of class \code{'nipals'}.}
