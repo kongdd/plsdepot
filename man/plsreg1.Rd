@@ -4,7 +4,7 @@
 \alias{plsreg1}
 \title{PLS-R1: Partial Least Squares Regression 1}
 \usage{
-plsreg1(predictors, response, comps = 2, crosval = TRUE)
+plsreg1(predictors, response, comps = 2, crosval = TRUE, seed = NULL)
 }
 \arguments{
 \item{predictors}{A numeric matrix or data frame with the predictor variables (which

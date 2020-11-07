@@ -79,7 +79,7 @@
 #'  plot(pls1_one)
 #'  }
 #'
-plsreg1 <- function(predictors, response, comps = 2, crosval = TRUE) {
+plsreg1 <- function(predictors, response, comps = 2, crosval = TRUE, seed = NULL) {
     # ======================================================= checking arguments
     # ======================================================= check predictors
     X = as.matrix(predictors)
@@ -150,6 +150,7 @@ plsreg1 <- function(predictors, response, comps = 2, crosval = TRUE) {
         # getting segments for CV
         sets_size = c(rep(n%/%10, 9), n - 9 * (n%/%10))
         # randomize observations
+        if (!is.null(seed)) set.seed(seed)
         obs = sample(1:n, size = n)
         # get segments
         segments = vector("list", length = 10)
@@ -234,7 +235,8 @@ plsreg1 <- function(predictors, response, comps = 2, crosval = TRUE) {
         }
         h = h + 1
     }  # end repeat
-    
+    # if h = 1, function will break
+
     # ======================================================= PLSR1 results
     # =======================================================
     if (crosval) {
@@ -248,10 +250,10 @@ plsreg1 <- function(predictors, response, comps = 2, crosval = TRUE) {
     }
     if (!crosval) 
         Q2cv = NULL
-    Th = Th[, 1:h]
-    Ph = Ph[, 1:h]
-    Wh = Wh[, 1:h]
-    Uh = Uh[, 1:h]
+    Th = Th[, 1:h, drop = FALSE]
+    Ph = Ph[, 1:h, drop = FALSE]
+    Wh = Wh[, 1:h, drop = FALSE]
+    Uh = Uh[, 1:h, drop = FALSE]
     ch = ch[1:h]
     # modified weights
     Ws = Wh %*% solve(t(Ph) %*% Wh)
@@ -277,23 +279,25 @@ plsreg1 <- function(predictors, response, comps = 2, crosval = TRUE) {
     # explained variance
     R2Xy = t(apply(cor.xyt^2, 1, cumsum))
     # Hotelling T2
-    T2hot = rbind(hlim[1:h], t(apply(Hot[, 1:h], 1, cumsum)))
+    T2hot = rbind(hlim[1:h], t(apply(Hot[, 1:h, drop = FALSE], 1, cumsum)))
     # add names
-    dimnames(Wh)      = list(colnames(X), paste(rep("w", h), 1:h, sep = ""))
-    dimnames(Ws)      = list(colnames(X), paste(rep("w*", h), 1:h, sep = ""))
-    dimnames(Th)      = list(rownames(X), paste(rep("t", h), 1:h, sep = ""))
-    dimnames(Ph)      = list(colnames(X), paste(rep("p", h), 1:h, sep = ""))
-    dimnames(Uh)      = list(rownames(Y), paste(rep("u", h), 1:h, sep = ""))
-    names(ch)         = paste(rep("c", h), 1:h, sep = "")
-    dimnames(T2hot)   = list(c("T2", rownames(X)), paste(rep("H", h), 1:h, sep = ""))
-    names(Bs)         = colnames(X)
-    names(Br)         = colnames(X)
-    names(resid)      = rownames(Y)
-    names(y.hat)      = rownames(Y)
-    names(R2)         = paste(rep("t", h), 1:h, sep = "")
-    colnames(R2Xy)    = paste(rep("t", h), 1:h, sep = "")
-    dimnames(cor.xyt) = list(c(colnames(X), colnames(Y)), colnames(Th))
-    
+    # browser()
+    # if (h > 1) {
+        dimnames(Wh)      = list(colnames(X), paste(rep("w", h), 1:h, sep = ""))
+        dimnames(Ws)      = list(colnames(X), paste(rep("w*", h), 1:h, sep = ""))
+        dimnames(Th)      = list(rownames(X), paste(rep("t", h), 1:h, sep = ""))
+        dimnames(Ph)      = list(colnames(X), paste(rep("p", h), 1:h, sep = ""))
+        dimnames(Uh)      = list(rownames(Y), paste(rep("u", h), 1:h, sep = ""))
+        names(ch)         = paste(rep("c", h), 1:h, sep = "")
+        # dimnames(T2hot)   = list(c("T2", rownames(X)), paste(rep("H", h), 1:h, sep = ""))
+        names(Bs)         = colnames(X)
+        names(Br)         = colnames(X)
+        names(resid)      = rownames(Y)
+        names(y.hat)      = rownames(Y)
+        names(R2)         = paste(rep("t", h), 1:h, sep = "")
+        colnames(R2Xy)    = paste(rep("t", h), 1:h, sep = "")
+        dimnames(cor.xyt) = list(c(colnames(X), colnames(Y)), colnames(Th))
+    # }
     PRESS <- Q2cv[, 1]
     if (!is.null(PRESS)) {
         sd.y <- attributes(Yy)$"scaled:scale"

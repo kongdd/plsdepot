@@ -12,7 +12,8 @@ plsreg1_adj(
   nminVar = 2,
   minVIP = 0.8,
   include.fitted = FALSE,
-  slope = slope,
+  slope = slope_lm,
+  verbose = FALSE,
   ...
 )
 }
